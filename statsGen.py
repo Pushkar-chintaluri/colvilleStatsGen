@@ -1,23 +1,12 @@
-from random import *
+import random
 
-reroll = True
-while (reroll):
-    results = []
-    results_str = []
-    for i in range(6):
-        dice = []
-        for die in range(4):
-            dice.append(randint(1, 6))
-        dice.remove(min(dice))
-        results.append(sum(dice))
-        results_str.append( str(dice) + " " + str(sum(dice)) )
+def getStats():
+    return [sum(i) for i in [sorted([random.randint(1,6) for a in range(1,5)])[1:] for each in range(1,7)]]
+
+def printStats(stats):
+    if len([s for s in stats if s>=15])>=2:
+        print (stats)
+    else:
+        printStats(getStats())
         
-    num_high = 0
-    for res in results:
-        if res >= 15:
-            num_high += 1
-    if (num_high >= 2):
-        reroll = False
-    if (not reroll):
-        for result in results_str:
-            print(result)
+printStats(getStats())
